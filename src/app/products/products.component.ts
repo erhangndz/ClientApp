@@ -14,11 +14,13 @@ export class ProductsComponent {
 
 
 constructor(private productService:ProductService){
-  this.products= this.productService.getProducts();
+this.getProducts();
 }
 
-getProducts(): Product[]{
-return this.productService.getProducts();
+getProducts(){
+ this.productService.getProducts().subscribe(products=>{
+  this.products = products;
+});
 }
 
 onSelectProduct(product:Product){
@@ -27,7 +29,9 @@ onSelectProduct(product:Product){
 
 
 deleteProduct(id:number){
-  this.productService.deleteProduct(id);
+  this.productService.deleteProduct(id).subscribe(p=>{
+    this.products.splice(this.products.findIndex(p=>p.id==id),1);
+  });
 
 }
 
