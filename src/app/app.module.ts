@@ -8,7 +8,14 @@ import { ProductsComponent } from './products/products.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { FormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {  provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component';
+import { MemberListComponent } from './member-list/member-list.component';
+import { FriendListComponent } from './friend-list/friend-list.component';
+import { HomeComponent } from './home/home.component';
+import { MessagesComponent } from './messages/messages.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { AuthGuard } from './_guards/auth-guard';
 
 @NgModule({
   declarations: [
@@ -16,17 +23,26 @@ import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@an
     NavbarComponent,
     ProductsComponent,
     ProductFormComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    RegisterComponent,
+    MemberListComponent,
+    FriendListComponent,
+    HomeComponent,
+    MessagesComponent,
+    NotfoundComponent,
+
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+
 
   ],
-  providers: [provideHttpClient(withInterceptorsFromDi())],
+  providers: [provideHttpClient(withInterceptorsFromDi()),
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
