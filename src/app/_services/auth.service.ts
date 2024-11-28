@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { TokenModel } from '../_models/tokenModel';
+import { jwtDecode } from 'jwt-decode';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +11,9 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 baseUrl: string = "https://localhost:5001/api/users/";
 
+
+jwtHelper = new JwtHelperService();
+decodedToken :any;
 
   constructor(private http: HttpClient) { }
 
@@ -18,8 +24,9 @@ return this.http.post(this.baseUrl+"login",model).pipe(
 
   map((response:any) => {
     if(response){
-      console.log(response);
+
       localStorage.setItem("token",response.token);
+
     }
 
   })
@@ -35,10 +42,23 @@ return this.http.post(this.baseUrl+"login",model).pipe(
 
   loggedIn(){
     const token = localStorage.getItem("token");
-    return token ? true: false;
+    return !this.jwtHelper.isTokenExpired(token);
+  }
+
+
+  getDecodedAccessToken(): TokenModel {
+    try {
+      const token = localStorage.getItem("token");
+      console.log(jwtDecode(token));
+      return jwtDecode(token);
+
+    } catch(Error) {
+      return null;
+    }
   }
 
 
 
-
 }
+
+

@@ -25,15 +25,15 @@ constructor(private authService: AuthService,
 
 this.authService.login(this.model).subscribe(response=>{
   this.router.navigate(['/members']);
+}, result=>{
+  console.log(result.error);
 });
 
 
   }
 
   loggedIn(){
-    const token = localStorage.getItem("token");
-
-    return token ? true: false;
+    return this.authService.loggedIn();
 
 
   }
@@ -44,22 +44,11 @@ this.authService.login(this.model).subscribe(response=>{
     this.router.navigate(['']);
   }
 
-  getDecodedAccessToken(): TokenModel {
-    try {
-      const token = localStorage.getItem("token");
-      console.log(jwtDecode(token));
-      return jwtDecode(token);
 
-    } catch(Error) {
-      return null;
-    }
-  }
-
-  getNameSurname()  {
+  getNameSurname() {
     const token = localStorage.getItem("token");
-let decodedToken = jwtDecode(token);
-this.tokenModel = decodedToken;
-return this.tokenModel.nameSurname;
+   this.tokenModel = jwtDecode(token);
+   return this.tokenModel.nameSurname;
 
   }
 

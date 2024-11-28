@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
     <div class="collapse navbar-collapse" id="navbarToggler">
-      <ul class="navbar-nav mr-auto">
+      <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
 
         <li class="navbar-nav">
           <a routerLink="members" routerLinkActive="active" class="nav-link">Members</a>
@@ -21,14 +21,14 @@
 
       <ul class="navbar-nav ml-auto" *ngIf="loggedIn()">
         <li class="navbar-nav">
-          <a class="nav-link" (click)="getDecodedAccessToken()">{{getNameSurname()}}</a>
+          <a class="nav-link">{{getNameSurname()}}</a>
         </li>
         <li class="navbar-nav">
           <a href="" class="nav-link" (click)="logout()">Logout</a>
         </li>
       </ul>
 
-      <form *ngIf="!loggedIn()" #form="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()">
+      <form *ngIf="!loggedIn()" #form="ngForm" class="form-inline mt-2 mt-md-0 ml-auto" (ngSubmit)="login()">
         <input #email="ngModel" class="form-control form-control-sm mr-sm-2" type="email" name="Email" placeholder="Email" [(ngModel)]="model.email" required >
         <input #password="ngModel" class="form-control form-control-sm mr-sm-2" type="password" name="Password" placeholder="Password" [(ngModel)]="model.password" required minlength="6">
         <button [disabled]="form.invalid" class="btn btn-outline-success btn-sm my-sm-0" type="submit">Login</button>
