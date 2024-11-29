@@ -25,8 +25,8 @@ constructor(private authService: AuthService,
 
 this.authService.login(this.model).subscribe(response=>{
   this.router.navigate(['/members']);
-}, result=>{
-  console.log(result.error);
+}, error=>{
+  alert(error.error);
 });
 
 
