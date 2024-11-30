@@ -15,7 +15,12 @@ import { HomeComponent } from './home/home.component';
 import { MessagesComponent } from './messages/messages.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthGuard } from './_guards/auth-guard';
+import { JwtModule } from '@auth0/angular-jwt';
 
+
+export function tokenGetter(){
+  return localStorage.getItem("token");
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +41,13 @@ import { AuthGuard } from './_guards/auth-guard';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter:tokenGetter,
+        allowedDomains: ["localhost:5001"],
+        disallowedRoutes: ["localhost:5001/api/auth"],
+      },
+    }),
 
 
 
