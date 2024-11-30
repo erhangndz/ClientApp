@@ -4,6 +4,7 @@ import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import {jwtDecode} from 'jwt-decode';
 import { TokenModel } from '../_models/tokenModel';
+import { AlertifyService } from '../_services/alertify.service';
 
 
 @Component({
@@ -17,16 +18,18 @@ model:any = {};
 tokenModel : any ={};
 
 constructor(private authService: AuthService,
-            private router: Router
+            private router: Router,
+            private alertify: AlertifyService
 ){}
 
 
   login(){
 
 this.authService.login(this.model).subscribe(response=>{
+  this.alertify.success("Login Success!");
   this.router.navigate(['/members']);
 }, error=>{
-  alert(error.error);
+  this.alertify.error(error.error);
 });
 
 
@@ -40,8 +43,8 @@ this.authService.login(this.model).subscribe(response=>{
 
   logout(){
     localStorage.removeItem("token");
-    console.log("logout success");
     this.router.navigate(['']);
+    this.alertify.warning("Logout Success!");
   }
 
 
