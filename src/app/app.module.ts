@@ -9,13 +9,14 @@ import { FormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import {  HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 import { FriendListComponent } from './friend-list/friend-list.component';
 import { HomeComponent } from './home/home.component';
 import { MessagesComponent } from './messages/messages.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthGuard } from './_guards/auth-guard';
 import { JwtModule } from '@auth0/angular-jwt';
+import { MemberDetailsComponent } from './members/member-details/member-details.component';
 
 
 export function tokenGetter(){
@@ -34,6 +35,7 @@ export function tokenGetter(){
     HomeComponent,
     MessagesComponent,
     NotfoundComponent,
+    MemberDetailsComponent,
 
 
   ],

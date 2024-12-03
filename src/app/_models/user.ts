@@ -15,6 +15,7 @@ country:string;
 about:string;
 hobby:string;
 image: Image;
+images: Image[];
 
 
 }
