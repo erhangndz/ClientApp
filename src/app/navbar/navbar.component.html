@@ -21,7 +21,7 @@
 
       <ul class="navbar-nav ml-auto" *ngIf="loggedIn()">
         <li class="navbar-nav">
-          <a class="nav-link">{{getNameSurname()}}</a>
+          <a routerLink="/member/edit" class="nav-link">{{getNameSurname()}}</a>
         </li>
         <li class="navbar-nav">
           <a href="" class="nav-link" (click)="logout()">Logout</a>

@@ -26,6 +26,7 @@ return this.http.post(this.baseUrl+"login",model).pipe(
     if(response){
 
       localStorage.setItem("token",response.token);
+      this.decodedToken= this.jwtHelper.decodeToken(response.token);
 
     }
 

@@ -14,7 +14,7 @@ city:string;
 country:string;
 about:string;
 hobby:string;
-image: Image;
+profileImage: Image;
 images: Image[];
 
 
