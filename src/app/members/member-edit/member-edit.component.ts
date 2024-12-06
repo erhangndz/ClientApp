@@ -3,6 +3,7 @@ import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { AuthService } from '../../_services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'member-edit',
@@ -12,19 +13,25 @@ import { AuthService } from '../../_services/auth.service';
 export class MemberEditComponent {
 user:  User;
 
-constructor(private userService:UserService,
-            private alertify: AlertifyService,
-            private authService:AuthService
+constructor(private route:ActivatedRoute,
+            private userService: UserService,
+            private authService:AuthService,
+            private alertify: AlertifyService
 ){
-  this.getUser();
+this.route.data.subscribe(data=>{
+  this.user= data['user'];
+}
+)
 }
 
 
-getUser(){
-this.userService.getUserById(this.authService.decodedToken.nameid).subscribe(user=>
-  this.user=user,
-  err=>this.alertify.error(err)
-)
+
+updateUser(){
+
+this.userService.updateUser(this.authService.decodedToken.nameid,this.user).subscribe(()=>
+  this.alertify.success("profile updated"),
+error=> this.alertify.error(error.statusText))
+
 }
 
 

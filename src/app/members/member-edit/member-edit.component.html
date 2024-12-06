@@ -37,27 +37,27 @@
       <div class="card text-left">
 
         <div class="card-body">
-        <form>
+        <form #editForm="ngForm" (ngSubmit)="updateUser()">
           <div class="form-group">
             <label for="about">About</label>
-            <textarea type="text" class="form-control" name="about" rows="5" [(ngModel)]="user.about"></textarea>
+            <textarea required="" type="text" class="form-control" name="about" rows="5" [(ngModel)]="user.about"></textarea>
           </div>
           <div class="form-group">
             <label for="hobby">Hobbies</label>
-            <input type="text" class="form-control" name="hobby" [(ngModel)]="user.hobby">
+            <input required="" type="text" class="form-control" name="hobby" [(ngModel)]="user.hobby">
           </div>
           <div class="form-row mb-3">
             <div class="col-md-6">
               <label for="country">Country</label>
-              <input type="text" name="country" class="form-control" [(ngModel)]="user.country">
+              <input required="" type="text" name="country" class="form-control" [(ngModel)]="user.country">
             </div>
             <div class="col-md-6">
               <label for="city">City</label>
-              <input type="text" name="city" class="form-control" [(ngModel)]="user.city">
+              <input required="" type="text" name="city" class="form-control" [(ngModel)]="user.city">
             </div>
           </div>
 
-            <button class="btn btn-success btn-block" >Save Changes</button>
+            <button [disabled]="editForm.invalid || !editForm.dirty" class="btn btn-success btn-block" >Save Changes</button>
 
 
         </form>
