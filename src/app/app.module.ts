@@ -20,6 +20,7 @@ import { MemberDetailsComponent } from './members/member-details/member-details.
 import { PhotoGalleryComponent } from './photo-gallery/photo-gallery.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { TimeagoModule } from 'ngx-timeago';
 
 
 export function tokenGetter(){
@@ -48,6 +49,7 @@ export function tokenGetter(){
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    TimeagoModule,
     JwtModule.forRoot({
       config:{
         tokenGetter:tokenGetter,
